@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int main() 
+int IPO() 
 {
     double beginningBal, depositAmt, withAmt, endBal,
            envPrice, papPrice, totalPrice,
