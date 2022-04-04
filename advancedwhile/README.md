@@ -1,5 +1,5 @@
 # While Practice
-This assignment was our first introduction to while loops. It was assigned on November 1st, 2021.
+This assignment was our 2nd encounter with while loops. It was assigned on November 9th, 2021.
 
 ## Refinements
 - Made the code a lot cleaner in terms of indentation, and made it a little more efficent despite it not taking that much processing. 
