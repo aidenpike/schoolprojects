@@ -1,4 +1,4 @@
-# While Practice
+# Advanced While Practice
 This assignment was our 2nd encounter with while loops. It was assigned on November 9th, 2021.
 
 ## Refinements
