@@ -1,5 +1,5 @@
-# Title
-This assignment was
+# Rock Paper Scissors
+This assignment was a combonation of everything we learned beforehand, a simple rock paper scissors script. It was assigned on November 26th, 2021.
 
 ## Refinements
 - Made the code a lot cleaner in terms of indentation, and made it a little more efficent despite it not taking that much processing. 
