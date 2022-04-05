@@ -1,4 +1,4 @@
-# Title
+# Indianapolis Indians
 This assignment was the final project for my first semester of sophomore year. It was assigned December 9th, 2021.
 
 ## Refinements
