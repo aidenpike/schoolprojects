@@ -1,4 +1,4 @@
-# Title
+# Parallel Arrays
 This assignment was an introduction to parallel arrays. It was assigned on January 14th, 2022.
 
 ## Refinements
