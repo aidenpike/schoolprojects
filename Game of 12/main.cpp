@@ -45,11 +45,11 @@ int main() {
     if (totalRoll == 12){
         cout << "You win!\n";
     }
-    else if (totalRoll > 0){
+    else if (totalRoll > 0 && totalRoll < 12){
         cout << "Close. You still win.\n";
     }
-    else if (totalRoll < 0){
-        cout << "You lose!\n";
+    else if (totalRoll > 12){
+        cout << "Bust, you lose!\n";
     }
       
 }
