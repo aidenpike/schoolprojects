@@ -1,6 +1,6 @@
 #include <iostream>
 #include <algorithm>
-#include "dragon.h"
+#include "Dragon.h"
 
 using namespace std;
 
@@ -9,12 +9,12 @@ int main() {
 
     string dragonName;
     int dragonWeight;
-    int choice;
+    int choice = 0;
+
+    dragonObj.assignInfo();
     
     while (choice < 5){
-        dragonObj.assignInfo(dragonName, dragonWeight);
-    
-        cout << "What do you want to do with " << dragonName << "?" << endl
+        cout << "What do you want to do with " << dragonObj.returnName() << "?" << endl
              << "\t1. Breath Fire"      << endl
              << "\t2. Fly"              << endl
              << "\t3. Kill"             << endl
@@ -22,8 +22,30 @@ int main() {
              << "\t5. Exit"             << endl;
         cin >> choice;
 
+        switch (choice){
+            case 1:
+                dragonObj.breathFire();
+            break;
 
-        cout << dragonName << " now weighs " << dragonObj.returnWeight() << " pounds.";
+            case 2:
+                dragonObj.fly();
+            break;
+
+            case 3:
+                dragonObj.kill();
+            break;
+
+            case 4: 
+                dragonObj.summonLightning();
+            break;
+        }
+        if (dragonObj.returnWeight() == 0)
+            choice = 5;
+        
+        cout << dragonObj.returnName() << " now weighs " << dragonObj.returnWeight() << " pounds." << endl;
     }
-    cout << "Goodbye!";
+    if (dragonObj.returnWeight() == 0)
+        cout << "You killed " << dragonObj.returnName() << "! How could you?" << endl;
+    else
+        cout << dragonObj.returnName() << " will be in good hands." << endl;
 }
