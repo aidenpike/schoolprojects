@@ -3,8 +3,6 @@ This was the first coding assignment we were given for Computer Science. It has 
 
 ## Refinements
 - Made indentation a lot cleaner.
-- Defined all variables upfront.
-- Made it to where all inputs can be put on one line for each scenario.
 
 ## Additions
 - Added small detail: shorthand if/else statement for overdraft on scenario 1.
