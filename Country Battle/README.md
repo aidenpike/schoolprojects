@@ -6,6 +6,6 @@ This assignment was our last project before the final for the end of the school 
 
 ## Additions
 - Coded the entire assignment in C# (main.cs), does the same thing as main.cpp.
-- winType() - How the player won
+- winType() - What type of win did the player get? Ideas: Vassalize the enemy, eliminate the enemy, initiate peace treaty
 - The ability to trade resources
 - Scientists who reduce the price of upgrading technology - Each scientist reduces price of a technology upgrade. 1 scientist per 2 territories; each round check how many territories each player has. Passive ability
