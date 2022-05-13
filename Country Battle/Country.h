@@ -16,7 +16,7 @@ class Country {
         double returnMoney();
         string returnName();
         void lostBattle();
-        void winBattle(); 
+        void winBattle(int); 
         void addScientist(); //+1 Scientist per 2 Territories. Check each round 
         void winType(); //How did the player win?
     private:
@@ -170,4 +170,62 @@ string Country::returnName(){
         return playerOneName;
     else if (player == 2)
         return playerTwoName;
+}
+
+void Country::lostBattle(){
+    srand(int(time(0)));
+    
+    if (player == 2){
+        cout << playerOneName << " has lost this skirmish." << endl;
+        playerOneArmies--;
+        playerOneTerritories--;
+        playerOneMoney = playerOneMoney - 500;
+    }
+    else if (player == 1){
+        cout << playerTwoName << " has lost this skirmish." << endl;
+        playerOneArmies--;
+        playerTwoArmies--;
+        playerTwoTerritories--;
+        playerTwoMoney = playerTwoMoney - 500;
+    }
+}
+
+void Country::winBattle(int battleSuccessRate){
+    srand(int(time(0)));
+    battleSuccessRate = 10 + rand() % (100 + 10 - 1);
+    
+    if (player == 1){
+        cout << playerOneName << " has won this skirmish!" << endl;
+
+        if (battleSuccessRate < 50){
+            cout << "Unfortunately, it was a tough battle.";
+            playerOneArmies--;
+        }
+        else if (battleSuccessRate >= 50 && battleSuccessRate < 100)
+            cout << playerOneName << "'s civilians give their praise." << endl;
+        else {
+            cout << "A glorious battle indeed! One of " << playerTwoName << "'s armies sides with you!" << endl;
+            playerOneArmies++;
+            playerTwoArmies--;
+        }
+        playerOneTerritories++;
+        playerOneMoney = playerOneMoney + 500; 
+    }
+    else if (player == 2){
+        cout << playerTwoName << " has won this skirmish!" << endl;
+
+        if (battleSuccessRate < 50){
+            cout << "Unfortunately, it was a tough battle.";
+            playerTwoArmies--;
+        }
+        else if (battleSuccessRate >= 50 && battleSuccessRate < 100)
+            cout << playerTwoName << "'s civilians give their praise." << endl;
+        else {
+            cout << "A glorious battle indeed! One of " << playerOneName << "'s armies sides with you!" << endl;
+            playerTwoArmies++;
+            playerOneArmies--;
+        }
+        playerTwoTerritories++;
+        playerTwoMoney = playerTwoMoney + 500; 
+    }
 }
