@@ -1,4 +1,4 @@
-# Country
+# Country Battle!
 This assignment was our last project before the final for the end of the school year. It was assigned on May 13th, 2022.
 
 ## Refinements
