@@ -77,3 +77,18 @@ void Country::upgradeTech(){
             cout << "You cannot upgrade your technology!";
     }
 }
+
+void Country::upgradeArmy(){
+    if (player == 1){
+        if (playerOneMoney >= 8000)
+            playerOneArmies++;
+        else
+            cout << "You cannot gain another army!" << endl;
+    }
+    else if (player == 2){
+        if (playerTwoMoney >= 8000)
+            playerTwoArmies++;
+        else
+            cout << "You cannot gain another army!" << endl;
+    }
+}
