@@ -14,6 +14,7 @@ class Country {
         int returnTerritories();
         int returnTech();
         double returnMoney();
+        string returnName();
         void lostBattle();
         void winBattle(); 
         void addScientist(); //+1 Scientist per 2 Territories. Check each round 
@@ -134,4 +135,39 @@ void Country::shrinkTerritories(char sellChoice){
         else
             cout << "You do not have enough territories to sell a territory!" << endl;
     }
+}
+
+int Country::returnArmies(){
+    if (player == 1)
+        return playerOneArmies;
+    else if (player == 2)
+        return playerTwoArmies;
+}
+
+int Country::returnTerritories(){
+    if (player == 1)
+        return playerOneTerritories;
+    else if (player == 2)
+        return playerTwoTerritories;
+}
+
+int Country::returnTech(){
+    if (player == 1)
+        return playerOneTechnology;
+    else if (player == 2)
+        return playerTwoTechnology;
+}
+
+double Country::returnMoney(){
+   if (player == 1)
+        return playerOneMoney;
+    else if (player == 2)
+        return playerTwoMoney; 
+}
+
+string Country::returnName(){
+    if (player == 1)
+        return playerOneName;
+    else if (player == 2)
+        return playerTwoName;
 }
