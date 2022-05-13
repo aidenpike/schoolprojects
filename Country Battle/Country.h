@@ -9,7 +9,7 @@ class Country {
         void growTerritories(); //+1 Territory for the player if they have an army for it and enough money
         void upgradeTech(); //+1 on Tech Rating for the player. Buff: Scientists reduce price by 100
         void upgradeArmy(); //+1 Army for the player if they have enough money 
-        void shrinkTerritories(); //-1 Territory for the player if they have at least 2 territories. Can be sold to opponent
+        void shrinkTerritories(char); //-1 Territory for the player if they have at least 2 territories. Can be sold to opponent
         int returnArmies(); 
         int returnTerritories();
         int returnTech();
@@ -90,5 +90,48 @@ void Country::upgradeArmy(){
             playerTwoArmies++;
         else
             cout << "You cannot gain another army!" << endl;
+    }
+}
+
+void Country::shrinkTerritories(char sellChoice){
+    if (player == 1){
+        if (playerOneTerritories > 1){
+            cout << "Would you like to sell your territory to " << playerTwoName << "? [Y or N]: ";
+            cin >> sellChoice;
+            sellChoice = toupper(sellChoice);
+
+            if (sellChoice == 'Y'){
+                cout << "You have sold your territory to " << playerTwoName << "." << endl;
+                playerOneTerritories--;
+                playerOneMoney = playerOneMoney + 10000;
+                playerTwoTerritories++;
+            }
+            else if (sellChoice == 'N'){
+                playerOneTerritories--;
+                playerOneMoney = playerOneMoney + 10000;
+            }
+        }
+        else
+            cout << "You do not have enough territories to sell a territory!" << endl;
+    }
+    else if (player == 2){
+        if (playerTwoTerritories > 1){
+            cout << "Would you like to sell your territory to " << playerOneName << "? [Y or N]: ";
+            cin >> sellChoice;
+            sellChoice = toupper(sellChoice);
+
+            if (sellChoice == 'Y'){
+                cout << "You have sold your territory to " << playerOneName << "." << endl;
+                playerTwoTerritories--;
+                playerTwoMoney = playerTwoMoney + 10000;
+                playerOneTerritories++;
+            }
+            else if (sellChoice == 'N'){
+                playerTwoTerritories--;
+                playerTwoMoney = playerTwoMoney + 10000;
+            }
+        }
+        else
+            cout << "You do not have enough territories to sell a territory!" << endl;
     }
 }
