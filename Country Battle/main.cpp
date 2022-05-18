@@ -66,7 +66,34 @@ int main() {
                 break;
     
                 case 5:
-                    //Attack action to be coded in main
+                    if (playerOne.returnArmies(1) > playerTwo.returnArmies(2)){
+                        playerOne.winBattle(1, 0);
+                        playerTwo.lostBattle(2);
+                    }
+                    else if (playerOne.returnArmies(1) == playerTwo.returnArmies(2)){
+                        if (playerOne.returnTech(1) > playerTwo.returnTech(2)){
+                            playerOne.winBattle(1, 0);
+                            playerTwo.lostBattle(2);
+                        }
+                        else if (playerOne.returnTech(1) == playerTwo.returnTech(2)){
+                            srand(int(time(0)));
+
+                            int i = 1 + rand() % (2 + 1 - 1);
+
+                            if (i == 1){
+                                playerOne.winBattle(1, 0);
+                                playerTwo.lostBattle(2);
+                            }
+                            else if (i == 2){
+                                playerTwo.winBattle(2, 0);
+                                playerOne.lostBattle(1);        
+                            }
+                        }
+                    }
+                    else {
+                        playerTwo.winBattle(2, 0);
+                        playerOne.lostBattle(1);
+                    }
                 break;
     
                 case 6:
@@ -82,8 +109,8 @@ int main() {
                 break;
             } 
 
-            cout << playerOne.returnName(1) << " you now have " << playerOne.returnArmies(1) << " Armies, " << playerOne.returnTerritories(1) << " Territories, Technology Level " << playerOne.returnTech(1) << "/10, and $" << playerOne.returnMoney(1) << endl;
-            misc.addScientist();
+            cout << playerOne.returnName(1) << " you now have " << playerOne.returnArmies(1) << " Armies, " << playerOne.returnTerritories(1) << " Territories, Technology Level " << playerOne.returnTech(1) << "/10, " << playerOne.returnScientists(1) << "/5 scientists, and $" << playerOne.returnMoney(1) << endl;
+
         } while (!hasWon);
         
             //Play Again
