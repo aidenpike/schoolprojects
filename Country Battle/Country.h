@@ -18,8 +18,7 @@ class Country {
         string returnName(int);
         void lostBattle(int);
         void winBattle(int, int);
-        void addScientist(); //+1 Scientist per 2 Territories. Check each round 
-        int returnScientists(int);
+        int returnScientists(int); //+1 Scientist per 2 Territories. Check each round 
         void winType(int, string); //How did the player win?
     //private:
         int playerOneArmies, playerTwoArmies;
@@ -33,9 +32,9 @@ class Country {
 //Implementation Section
 Country::Country(){
     playerOneArmies = 10, playerTwoArmies = 10;
-    playerOneScientists = 2, playerTwoScientists = 2; 
+    playerOneScientists = 0, playerTwoScientists = 0; 
     playerOneMoney = 100000.0, playerTwoMoney = 100000.0;
-    playerOneTerritories = 5, playerTwoTerritories = 5;
+    playerOneTerritories = 1, playerTwoTerritories = 1;
     playerOneTechnology = 1, playerTwoTechnology = 1; //x/10 Rating
     player1Name = "", player2Name = "";
 }
@@ -203,13 +202,13 @@ string Country::returnName(int player){
 void Country::lostBattle(int player){
     srand(int(time(0)));
     
-    if (player == 2){
+    if (player == 1){
         cout << playerOneName << " has lost this skirmish." << endl;
         playerOneArmies--;
         playerOneTerritories--;
         playerOneMoney = playerOneMoney - 500;
     }
-    else if (player == 1){
+    else if (player == 2){
         cout << playerTwoName << " has lost this skirmish." << endl;
         playerOneArmies--;
         playerTwoArmies--;
@@ -259,10 +258,35 @@ void Country::winBattle(int player, int battleSuccessRate){
 }
 
 int Country::returnScientists(int player){
-    if (player == 1)
+    if (player == 1){
+        switch (playerOneTerritories){
+        case 2:
+            playerOneScientists = 1;
+        break;
+
+        case 4:
+            playerOneScientists = 2;
+        break;
+
+        case 6: 
+            playerOneScientists = 3;
+        break;
+
+        case 8:
+            playerOneScientists = 4;
+        break;
+        
+        case 10:
+            playerOneScientists = 5;
+        break;   
+        }
+
         return playerOneScientists;
-    else if (player == 2)
-        return playerTwoScientists;
+    }
+    else if (player == 2){
+        return playerTwoScientists;   
+    }
+    
 }
 
 void Country::winType(int player, string winType){
@@ -274,10 +298,4 @@ void Country::winType(int player, string winType){
         if (winType == "forfeit")
             cout << playerTwoName << " has won via forfeit from " << playerOneName << "." << endl;   
     }
-}
-
-void Country::addScientist(){
-    playerOneScientists = 2 / playerOneTerritories;
-    
-    cout << playerOneScientists << endl;
 }
