@@ -1,31 +1,33 @@
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
 class Country {
     public:
         Country();
-        void getName(string, string); //Assigns private name vars to names assigned from main to this function
-        void growTerritories(); //+1 Territory for the player if they have an army for it and enough money
-        void upgradeTech(); //+1 on Tech Rating for the player. Buff: Scientists reduce price by 100
-        void upgradeArmy(); //+1 Army for the player if they have enough money 
-        void shrinkTerritories(char); //-1 Territory for the player if they have at least 2 territories. Can be sold to opponent
-        int returnArmies(); 
-        int returnTerritories();
-        int returnTech();
-        double returnMoney();
-        string returnName();
-        void lostBattle();
-        void winBattle(int); 
+        void getName(); //Assigns private name vars to names assigned from main to this function
+        void growTerritories(int); //+1 Territory for the player if they have an army for it and enough money
+        void upgradeTech(int); //+1 on Tech Rating for the player. Buff: Scientists reduce price by 100
+        void upgradeArmy(int); //+1 Army for the player if they have enough money 
+        void shrinkTerritories(char, char, int); //-1 Territory for the player if they have at least 2 territories. Can be sold to opponent
+        int returnArmies(int); 
+        int returnTerritories(int);
+        int returnTech(int);
+        double returnMoney(int);
+        string returnName(int);
+        void lostBattle(int);
+        void winBattle(int, int);
         void addScientist(); //+1 Scientist per 2 Territories. Check each round 
-        void winType(); //How did the player win?
-    private:
+        int returnScientists(int);
+        void winType(int, string); //How did the player win?
+    //private:
         int playerOneArmies, playerTwoArmies;
         int playerOneScientists, playerTwoScientists;
         double playerOneMoney, playerTwoMoney;
         int playerOneTerritories, playerTwoTerritories;
         int playerOneTechnology, playerTwoTechnology;
-        string playerOneName, playerTwoName;
+        string player1Name, player2Name;
 };
 
 //Implementation Section
@@ -35,19 +37,25 @@ Country::Country(){
     playerOneMoney = 100000.0, playerTwoMoney = 100000.0;
     playerOneTerritories = 5, playerTwoTerritories = 5;
     playerOneTechnology = 1, playerTwoTechnology = 1; //x/10 Rating
-    playerOneName = "", playerTwoName = "";
+    player1Name = "", player2Name = "";
 }
 
-int player; //Defines which player is currently doing an action
+int p1Money;
+string playerOneName, playerTwoName;
 
-void Country::getName(string player1Name, string player2Name){
-    playerOneName = player1Name;
-    playerTwoName = player2Name;
+void Country::getName(){
+    cout << "Player one, enter your name: ";
+    getline(cin, playerOneName);
+    cout << "Player two, enter your name: ";
+    getline(cin, playerTwoName);
+    
+    player1Name = playerOneName;
+    player2Name = playerTwoName;
 }
 
-void Country::growTerritories(){
+void Country::growTerritories(int player){
     if (player == 1){
-        if (playerOneArmies >= playerOneTerritories && playerOneMoney >= 10000){
+        if (playerOneArmies > playerOneTerritories && playerOneMoney >= 10000){
             playerOneTerritories++;
             playerOneMoney = playerOneMoney - 10000;
         }
@@ -64,22 +72,22 @@ void Country::growTerritories(){
     }
 }
 
-void Country::upgradeTech(){
+void Country::upgradeTech(int player){
     if (player == 1){
         if ((playerOneMoney) >= (5000 - (playerOneScientists * 100)) && playerOneTechnology < 10)
             playerOneTechnology++;
         else 
-            cout << "You cannot upgrade your technology!";
+            cout << "You cannot upgrade your technology!" << endl;
     }
     else if (player == 2){
         if ((playerTwoMoney) >= (5000 - (playerTwoScientists * 100)) && playerTwoTechnology < 10)
             playerTwoTechnology++;
         else 
-            cout << "You cannot upgrade your technology!";
+            cout << "You cannot upgrade your technology!" << endl;
     }
 }
 
-void Country::upgradeArmy(){
+void Country::upgradeArmy(int player){
     if (player == 1){
         if (playerOneMoney >= 8000)
             playerOneArmies++;
@@ -94,18 +102,26 @@ void Country::upgradeArmy(){
     }
 }
 
-void Country::shrinkTerritories(char sellChoice){
+void Country::shrinkTerritories(char sellChoice, char p2choice, int player){
     if (player == 1){
         if (playerOneTerritories > 1){
+            cin.ignore();
             cout << "Would you like to sell your territory to " << playerTwoName << "? [Y or N]: ";
             cin >> sellChoice;
             sellChoice = toupper(sellChoice);
 
             if (sellChoice == 'Y'){
-                cout << "You have sold your territory to " << playerTwoName << "." << endl;
-                playerOneTerritories--;
-                playerOneMoney = playerOneMoney + 10000;
-                playerTwoTerritories++;
+                cout << playerTwoName << ", do you oblige? You will pay them $10000. [Y or N]: ";
+                cin >> p2choice;
+                p2choice = toupper(p2choice);
+                
+                if (p2choice == 'Y'){
+                    cout << "You have sold your territory to " << playerTwoName << "." << endl;
+                    playerOneTerritories--;
+                    playerOneMoney = playerOneMoney + 10000;
+                    playerTwoMoney = playerTwoMoney - 10000;
+                    playerTwoTerritories++;
+                }
             }
             else if (sellChoice == 'N'){
                 playerOneTerritories--;
@@ -117,16 +133,29 @@ void Country::shrinkTerritories(char sellChoice){
     }
     else if (player == 2){
         if (playerTwoTerritories > 1){
+            cin.ignore();
             cout << "Would you like to sell your territory to " << playerOneName << "? [Y or N]: ";
             cin >> sellChoice;
             sellChoice = toupper(sellChoice);
 
             if (sellChoice == 'Y'){
-                cout << "You have sold your territory to " << playerOneName << "." << endl;
-                playerTwoTerritories--;
-                playerTwoMoney = playerTwoMoney + 10000;
-                playerOneTerritories++;
+                cout << playerOneName << ", do you oblige? You will pay them $10000. [Y or N]: ";
+                cin >> p2choice;
+                p2choice = toupper(p2choice);
+                
+                if (p2choice == 'Y'){
+                    cout << "You have sold your territory to " << playerOneName << "." << endl;
+                    playerTwoTerritories--;
+                    playerTwoMoney = playerTwoMoney + 10000;
+                    playerOneMoney = playerOneMoney - 10000;
+                    playerOneTerritories++;
+                }
             }
+            else if (sellChoice == 'N'){
+                playerOneTerritories--;
+                playerOneMoney = playerOneMoney + 10000;
+            }
+        }
             else if (sellChoice == 'N'){
                 playerTwoTerritories--;
                 playerTwoMoney = playerTwoMoney + 10000;
@@ -135,44 +164,43 @@ void Country::shrinkTerritories(char sellChoice){
         else
             cout << "You do not have enough territories to sell a territory!" << endl;
     }
-}
 
-int Country::returnArmies(){
+int Country::returnArmies(int player){
     if (player == 1)
         return playerOneArmies;
     else if (player == 2)
         return playerTwoArmies;
 }
 
-int Country::returnTerritories(){
+int Country::returnTerritories(int player){
     if (player == 1)
         return playerOneTerritories;
     else if (player == 2)
         return playerTwoTerritories;
 }
 
-int Country::returnTech(){
+int Country::returnTech(int player){
     if (player == 1)
         return playerOneTechnology;
     else if (player == 2)
         return playerTwoTechnology;
 }
 
-double Country::returnMoney(){
+double Country::returnMoney(int player){
    if (player == 1)
         return playerOneMoney;
     else if (player == 2)
         return playerTwoMoney; 
 }
 
-string Country::returnName(){
+string Country::returnName(int player){
     if (player == 1)
         return playerOneName;
     else if (player == 2)
         return playerTwoName;
 }
 
-void Country::lostBattle(){
+void Country::lostBattle(int player){
     srand(int(time(0)));
     
     if (player == 2){
@@ -190,7 +218,7 @@ void Country::lostBattle(){
     }
 }
 
-void Country::winBattle(int battleSuccessRate){
+void Country::winBattle(int player, int battleSuccessRate){
     srand(int(time(0)));
     battleSuccessRate = 10 + rand() % (100 + 10 - 1);
     
@@ -198,7 +226,7 @@ void Country::winBattle(int battleSuccessRate){
         cout << playerOneName << " has won this skirmish!" << endl;
 
         if (battleSuccessRate < 50){
-            cout << "Unfortunately, it was a tough battle.";
+            cout << "Unfortunately, it was a tough battle, and you lose an army." << endl;
             playerOneArmies--;
         }
         else if (battleSuccessRate >= 50 && battleSuccessRate < 100)
@@ -215,7 +243,7 @@ void Country::winBattle(int battleSuccessRate){
         cout << playerTwoName << " has won this skirmish!" << endl;
 
         if (battleSuccessRate < 50){
-            cout << "Unfortunately, it was a tough battle.";
+            cout << "Unfortunately, it was a tough battle, and you lose one of your armies." << endl;
             playerTwoArmies--;
         }
         else if (battleSuccessRate >= 50 && battleSuccessRate < 100)
@@ -228,4 +256,28 @@ void Country::winBattle(int battleSuccessRate){
         playerTwoTerritories++;
         playerTwoMoney = playerTwoMoney + 500; 
     }
+}
+
+int Country::returnScientists(int player){
+    if (player == 1)
+        return playerOneScientists;
+    else if (player == 2)
+        return playerTwoScientists;
+}
+
+void Country::winType(int player, string winType){
+    if (player == 1){
+        if (winType == "forfeit")
+            cout << playerOneName << " has won via forfeit from " << playerTwoName << "." << endl;
+    }
+    else if (player == 2){
+        if (winType == "forfeit")
+            cout << playerTwoName << " has won via forfeit from " << playerOneName << "." << endl;   
+    }
+}
+
+void Country::addScientist(){
+    playerOneScientists = 2 / playerOneTerritories;
+    
+    cout << playerOneScientists << endl;
 }
