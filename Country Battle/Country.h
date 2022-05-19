@@ -261,43 +261,76 @@ void Country::winBattle(int player, int battleSuccessRate){
 int Country::returnScientists(int player){
     if (player == 1){
         switch (playerOneTerritories){
-        case 2:
-            playerOneScientists = 1;
-        break;
-
-        case 4:
-            playerOneScientists = 2;
-        break;
-
-        case 6: 
-            playerOneScientists = 3;
-        break;
-
-        case 8:
-            playerOneScientists = 4;
-        break;
-        
-        case 10:
-            playerOneScientists = 5;
-        break;   
+            case 1: 
+                playerOneScientists = 0;
+            break;
+            
+            case 2:
+                playerOneScientists = 1;
+            break;
+    
+            case 4:
+                playerOneScientists = 2;
+            break;
+    
+            case 6: 
+                playerOneScientists = 3;
+            break;
+    
+            case 8:
+                playerOneScientists = 4;
+            break;
+            
+            case 10:
+                playerOneScientists = 5;
+            break;   
         }
 
         return playerOneScientists;
     }
     else if (player == 2){
+        switch (playerTwoTerritories){
+            case 1: 
+                playerTwoScientists = 0;
+            break;
+            
+            case 2:
+                playerTwoScientists = 1;
+            break;
+    
+            case 4:
+                playerTwoScientists = 2;
+            break;
+    
+            case 6: 
+                playerTwoScientists = 3;
+            break;
+    
+            case 8:
+                playerTwoScientists = 4;
+            break;
+            
+            case 10:
+                playerTwoScientists = 5;
+            break;   
+        }
+        
         return playerTwoScientists;   
     }
-    
 }
 
 void Country::winType(int player, string winType){
     if (player == 1){
         if (winType == "forfeit")
             cout << playerOneName << " has won via forfeit from " << playerTwoName << "." << endl;
+        else if (winType == "conquer")
+            cout << playerOneName << " has conquered " << playerTwoName << "." << endl;
     }
     else if (player == 2){
         if (winType == "forfeit")
-            cout << playerTwoName << " has won via forfeit from " << playerOneName << "." << endl;   
+            cout << playerTwoName << " has won via forfeit from " << playerOneName << "." << endl;
+        else if (winType == "conquer")
+            cout << playerTwoName << " has conquered " << playerOneName << "." << endl;
     }
 }
 
