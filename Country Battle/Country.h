@@ -34,7 +34,7 @@ class Country {
 Country::Country(){
     playerOneArmies = 10, playerTwoArmies = 10;
     playerOneScientists = 0, playerTwoScientists = 0; 
-    playerOneMoney = 100000.0, playerTwoMoney = 100000.0;
+    playerOneMoney = 50000.0, playerTwoMoney = 50000.0;
     playerOneTerritories = 1, playerTwoTerritories = 1;
     playerOneTechnology = 1, playerTwoTechnology = 1; //x/10 Rating
     player1Name = "", player2Name = "";
@@ -325,12 +325,24 @@ void Country::winType(int player, string winType){
             cout << playerOneName << " has won via forfeit from " << playerTwoName << "." << endl;
         else if (winType == "conquer")
             cout << playerOneName << " has conquered " << playerTwoName << "." << endl;
+        else if (winType == "elim")
+            cout << playerOneName << " has eliminated " << playerTwoName << "." << endl;
+        else if (winType == "full elim")
+            cout << playerOneName << " has fully eliminated " << playerTwoName << ". Perfect score!" << endl;       
+        else if (winType == "devastation")
+            cout << playerOneName << " has devastated " << playerTwoName << "." << endl;
     }
     else if (player == 2){
         if (winType == "forfeit")
             cout << playerTwoName << " has won via forfeit from " << playerOneName << "." << endl;
         else if (winType == "conquer")
             cout << playerTwoName << " has conquered " << playerOneName << "." << endl;
+        else if (winType == "elim")
+            cout << playerTwoName << " has eliminated " << playerOneName << "." << endl;
+        else if (winType == "full elim")
+            cout << playerTwoName << " has fully eliminated " << playerOneName << ". Perfect score!" << endl;
+        else if (winType == "devastation")
+            cout << playerTwoName << " has devastated " << playerOneName << "." << endl;
     }
 }
 
@@ -341,13 +353,5 @@ void Country::deCheeser(int option){
     
         if (playerTwoTerritories > playerOneArmies)
             playerTwoTerritories = playerOneArmies;    
-    }
-    else if (option == 2){
-        playerOneArmies = 10, playerTwoArmies = 10;
-        playerOneScientists = 0, playerTwoScientists = 0; 
-        playerOneMoney = 100000.0, playerTwoMoney = 100000.0;
-        playerOneTerritories = 1, playerTwoTerritories = 1;
-        playerOneTechnology = 1, playerTwoTechnology = 1;
-        player1Name = "", player2Name = "";
     }
 }
