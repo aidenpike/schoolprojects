@@ -33,16 +33,33 @@ int main() {
 cout << "Press enter to continue. ";                                    
 cin.ignore();
 misc.getName();
-misc.deCheeser(2);
 
 cout << playerOne.returnName(1) << " you have " << playerOne.returnArmies(1) << " Armies, " << playerOne.returnTerritories(1) << " Territories, Technology Level " << playerOne.returnTech(1) << "/10, and $" << playerOne.returnMoney(1) << endl;
     cout << playerTwo.returnName(2) << " you now " << playerTwo.returnArmies(2) << " Armies, " << playerTwo.returnTerritories(2) << " Territories, Technology Level " << playerTwo.returnTech(2) << "/10, and $" << playerTwo.returnMoney(2) << endl;
     
     do {
         //Player 1
-        //Has Player One been conquered?
+        //Conquer
         if (playerOne.returnTerritories(1) <= 0){
             playerTwo.winType(2, "conquer");
+            hasWon = false;
+            return 0;
+        }
+        //Elimination
+        else if (playerOne.returnArmies(1) <= 0 && playerOne.returnTerritories(1) <= 0){
+            playerTwo.winType(2, "elim");
+            hasWon = false;
+            return 0;
+        }
+        //Full Elimination
+        else if (playerOne.returnArmies(1) <= 0 && playerOne.returnTerritories(1) <= 0 && playerOne.returnMoney(1) <= 0){
+            playerTwo.winType(2, "full elim");
+            hasWon = false;
+            return 0;
+        }
+        //Devastation
+        else if (playerOne.returnMoney(1) <= 0){
+            playerTwo.winType(2, "devastation");
             hasWon = false;
             return 0;
         }
@@ -123,11 +140,31 @@ cout << playerOne.returnName(1) << " you have " << playerOne.returnArmies(1) << 
         playerOne.deCheeser(1);
 
     //Player 2
-        if (playerTwo.returnTerritories(2) <= 0){
-            playerOne.winType(1, "conquer");
+    //Conquer
+        if (playerOne.returnTerritories(1) <= 0){
+            playerTwo.winType(2, "conquer");
             hasWon = false;
             return 0;
         }
+        //Elimination
+        else if (playerOne.returnArmies(1) <= 0 && playerOne.returnTerritories(1) <= 0){
+            playerTwo.winType(2, "elim");
+            hasWon = false;
+            return 0;
+        }
+        //Full Elimination
+        else if (playerOne.returnArmies(1) <= 0 && playerOne.returnTerritories(1) <= 0 && playerOne.returnMoney(1) <= 0){
+            playerTwo.winType(2, "full elim");
+            hasWon = false;
+            return 0;
+        }
+        //Devastation
+        else if (playerOne.returnMoney(1) <= 0){
+            playerTwo.winType(2, "devastation");
+            hasWon = false;
+            return 0;
+        }
+        
         cout << playerTwo.returnName(2) << ", it is your turn. What do you wish to do?" << endl <<
                                            "\t1. Grow Territories ($10000 [Requires a spare army to control])\n" <<
                                            "\t2. Shrink Territories (Get back $10000 [Can sell to " << playerOne.returnName(1) << "])\n" << 
