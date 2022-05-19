@@ -28,12 +28,13 @@ int main() {
                         "         W:::::::W       W:::::::W      a::::a    a:::::a r:::::r                 \n" << 
                         "          W:::::W         W:::::W       a:::::aaaa::::::a r:::::r             !!! \n" << 
                         "           W:::W           W:::W         a::::::::::aa:::ar:::::r            !!:!!\n" <<
-                        "            WWW             WWW           aaaaaaaaaa  aaaarrrrrrr             !!!\033[0m\n" << 
-                        "Press enter to continue. "                                                            << endl;
+                        "            WWW             WWW           aaaaaaaaaa  aaaarrrrrrr             !!!\033[0m\n" << endl;
     do {
+        cout << "Press enter to continue. ";                                    
         cin.ignore();
         misc.getName();
-
+        misc.deCheeser(2);
+        
         cout << playerOne.returnName(1) << " you have " << playerOne.returnArmies(1) << " Armies, " << playerOne.returnTerritories(1) << " Territories, Technology Level " << playerOne.returnTech(1) << "/10, and $" << playerOne.returnMoney(1) << endl;
             cout << playerTwo.returnName(2) << " you now " << playerTwo.returnArmies(2) << " Armies, " << playerTwo.returnTerritories(2) << " Territories, Technology Level " << playerTwo.returnTech(2) << "/10, and $" << playerTwo.returnMoney(2) << endl;
         
@@ -110,7 +111,7 @@ int main() {
             } 
 
             cout << playerOne.returnName(1) << " you now have " << playerOne.returnArmies(1) << " Armies, " << playerOne.returnTerritories(1) << " Territories, Technology Level " << playerOne.returnTech(1) << "/10, " << playerOne.returnScientists(1) << "/5 scientists, and $" << playerOne.returnMoney(1) << endl;
-
+            playerOne.deCheeser(1);
         } while (!hasWon);
         
             //Play Again
