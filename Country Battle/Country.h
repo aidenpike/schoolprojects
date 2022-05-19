@@ -18,8 +18,9 @@ class Country {
         string returnName(int);
         void lostBattle(int);
         void winBattle(int, int);
-        int returnScientists(int); //+1 Scientist per 2 Territories. Check each round 
+        int returnScientists(int); //+1 Scientist per 2 Territories. Check each round
         void winType(int, string); //How did the player win?
+        void deCheeser(int); //Stops from cheesing the game (1) and also resets stats (2)
     //private:
         int playerOneArmies, playerTwoArmies;
         int playerOneScientists, playerTwoScientists;
@@ -225,7 +226,7 @@ void Country::winBattle(int player, int battleSuccessRate){
         cout << playerOneName << " has won this skirmish!" << endl;
 
         if (battleSuccessRate < 50){
-            cout << "Unfortunately, it was a tough battle, and you lose an army." << endl;
+            cout << "Unfortunately, it was a tough battle, and " << playerOneName << " loses an army." << endl;
             playerOneArmies--;
         }
         else if (battleSuccessRate >= 50 && battleSuccessRate < 100)
@@ -242,7 +243,7 @@ void Country::winBattle(int player, int battleSuccessRate){
         cout << playerTwoName << " has won this skirmish!" << endl;
 
         if (battleSuccessRate < 50){
-            cout << "Unfortunately, it was a tough battle, and you lose one of your armies." << endl;
+            cout << "Unfortunately, it was a tough battle, and " << playerTwoName << " loses an army." << endl;
             playerTwoArmies--;
         }
         else if (battleSuccessRate >= 50 && battleSuccessRate < 100)
@@ -297,5 +298,23 @@ void Country::winType(int player, string winType){
     else if (player == 2){
         if (winType == "forfeit")
             cout << playerTwoName << " has won via forfeit from " << playerOneName << "." << endl;   
+    }
+}
+
+void Country::deCheeser(int option){   
+    if (option == 1){
+        if (playerOneTerritories > playerOneArmies)
+            playerOneTerritories = playerOneArmies;
+    
+        if (playerTwoTerritories > playerOneArmies)
+            playerTwoTerritories = playerOneArmies;    
+    }
+    else if (option == 2){
+        playerOneArmies = 10, playerTwoArmies = 10;
+        playerOneScientists = 0, playerTwoScientists = 0; 
+        playerOneMoney = 100000.0, playerTwoMoney = 100000.0;
+        playerOneTerritories = 1, playerTwoTerritories = 1;
+        playerOneTechnology = 1, playerTwoTechnology = 1;
+        player1Name = "", player2Name = "";
     }
 }
