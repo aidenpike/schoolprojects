@@ -9,6 +9,7 @@ This assignment was our last project before the final for the end of the school 
 - winType() - What type of win did the player get?:
   - Forfeit - Player chooses to forfeit battle and automatically loses.
   - Conquer - Player manages to make opponent have no territories via attacking.
-  - Full Elimination - Player manages to take out all armies and territories of the opponent.
+  - Elimination - Player manages to take out all armies and territories of the opponent.
+  - Full Elimination - Player manages to take out all armies and territories of the opponent, and makes the opponent broke.
   - Devastation - Player causes opponent to become broke.
 - Scientists who reduce the price of upgrading technology - Each scientist reduces price of a technology upgrade. 1 scientist per 2 territories; each round check how many territories each player has. Passive ability
