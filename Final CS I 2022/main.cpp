@@ -2,6 +2,12 @@
 #include <algorithm>
 
 using namespace std;
+using std::transform;
+
+void guess();
+void correct();
+
+int num = 0; 
 
 int main() {
 //Arrays
@@ -21,6 +27,41 @@ int main() {
             cout << teamName[i]  << endl;
     }
 //Functions
-
+    guess();
+    correct();
 //Strings
+    string lastName;
+    
+    cout << "Enter in your last name: ";
+    cin >> lastName;
+    
+    transform(lastName.begin(), lastName.end(), lastName.begin(),::toupper);
+    
+    if (lastName[0] == 'T')
+        cout << "Congratulations it is FREE!!!" << endl;
+    else if (lastName == "WISEMAN")
+        cout << "Congratualtions you get a 50% discount!" << endl;
+    else if (lastName < "Hassett") 
+        cout << "Sorry you have to pay $15 more this year." << endl;
+    else
+        cout << "You have to pay the same as last year.";
+}
+
+void guess(){
+    cout << "Guess a number between 1-10: ";
+    cin >> num;
+}
+
+void correct(){
+    srand(int(time(0)));
+    int numCorrect = 1 + rand() % (10 + 1 - 1);
+    
+    if (numCorrect > num)
+        cout << "Too low of a guess." << endl;
+    else if (numCorrect < num)
+        cout << "Too high of a guess." << endl;
+    else 
+        cout << "That is correct!" << endl;
+
+    cout << "The number was " << numCorrect << endl;
 }
