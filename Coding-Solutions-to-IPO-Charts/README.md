@@ -7,6 +7,7 @@ This was the first coding assignment we were given for Computer Science. It has 
 ## Additions
 - Added small detail: shorthand if/else statement for overdraft on scenario 1.
 - Made each scenario name have color.
+- Coded the entire thing in C# (main.cs), Java (main.java), and LOLCAT (main.lol).
 
 ## The Assignment
 Today you are coding solutions to the 3 scenarios from your first IPO Chart assignment. In the editor on the top left, I have the main function with a section of code for each scenarios. You will write your code where I have left the comment "You code here." The bottom left is the terminal which is where you will see the output of cout commands and where you can type in cin values to test your program. I suggest pulling up your first IPO chart assignment to help you with this assignment; however, I have posted the scenarios below as well. Good luck!
