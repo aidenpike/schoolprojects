@@ -38,5 +38,31 @@ class Program {
     
         Console.Write("There are " + indexA + " absent, and ");
         Console.WriteLine(indexP + " present.");
+
+        //Scenario 3
+        //10 instances of 2 grades (10 students, midterm and final)
+        int maxMidterm = 0;
+        int maxFinal = 0;
+        
+        int[,] scores = {{78, 90},
+                         {87, 88},
+                         {65, 70},
+                         {56, 100},
+                         {74, 72},
+                         {33, 47},
+                         {87, 88},
+                         {73, 73},
+                         {79, 83},
+                         {95, 89}};
+
+        for (int x = 0; x < 10; x++){
+            for (int y = 0; y < 2; y++){
+                maxMidterm = Math.Max(scores[0,0], scores[x,0]);
+                maxFinal = Math.Max(scores[0,0], scores[x, 1]);
+            }
+        }
+
+        Console.Write("The highest midterm score was " + maxMidterm + ", and ");
+        Console.WriteLine("the highest final score was " + maxFinal);
     }
 }
