@@ -14,6 +14,29 @@ class Program {
             }    
         }
         
-        Console.WriteLine(friesSum);
+        Console.WriteLine("There are " + friesSum + " fries.");
+
+        //Scenario 2
+        //5 instances of 4 values (Names followed by As and Ps)
+        int indexA = 0;
+        int indexP = 0;
+        string[,] students = {{"Kirsten","A","P","A"},
+                              {"Evan", "P", "A", "P"},
+                              {"Rylan", "P", "P", "P"},
+                              {"Joe", "A", "P", "P"},
+                              {"Collin", "P", "P", "P"}};
+        for (int x = 0; x < 5; x++){
+            for (int y = 0; y < 4; y++){
+                if (students[x,y] == "A"){
+                    indexA++;
+                }
+                else if (students[x,y] == "P"){
+                    indexP++;
+                }
+            }
+        }
+    
+        Console.Write("There are " + indexA + " absent, and ");
+        Console.WriteLine(indexP + " present.");
     }
 }
